@@ -1,36 +1,35 @@
 import cv2
 
-# Load the cascade
+# Φορτωσε το machine learning βοήθημα μας
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
-# To capture video from webcam. 
+# Αυτό ισχύει για λήψη βίντεο από κάμερα web, ομως αν εχω συνδεσει την D435i την διαβάζει πρώτη και χρησιμοποιεί αυτήν
 cap = cv2.VideoCapture(0)
-# To use a video file as input 
-# cap = cv2.VideoCapture('filename.mp4')
+
 
 while True:
-    # Read the frame
+    # Διάβασε το frame
     _, img = cap.read()
 
-    # Convert to grayscale
+    # Μετέτρεψε σε κλίμακα του γκρι
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    # Detect the faces
+    # Εντόπισε τα πρόσωπα
     faces = face_cascade.detectMultiScale(gray, 1.1, 4)
 
-    # Draw the rectangle around each face
+    # Φτιάξε τετράγωνο γυρω από κάθε πρόσωπο
     for (x, y, w, h) in faces:
         cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
-    # Display
+    # Εμφάνισε
     cv2.imshow('img', img)
 
-    # Stop if key "q" is pressed
+
     key = cv2.waitKey(1)
-    # Press 'q' to close the image window
+    # Πάτα το 'q' για να κλείσει το παράθυρο αφού πρώτα το έχεις επιλέξει
     if key & 0xFF == ord('q'):
         cv2.destroyAllWindows()
         break
-# I added this line to check something in Git - not important
-# Release the VideoCapture object
+
+# Αποδέσμευσε την κάμερα
 cap.release()
