@@ -14,7 +14,7 @@ pipeline.start(config)
 try:
     while True:
 
-        # Περιμενε για το ζεύγος πλαισίων: βάθος και χρώμα
+        # Περίμενε για το ζεύγος πλαισίων: βάθος και χρώμα
         frames = pipeline.wait_for_frames()
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
@@ -35,6 +35,7 @@ try:
         cv2.namedWindow('RealSense', cv2.WINDOW_AUTOSIZE)
         cv2.imshow('RealSense', images)
         key = cv2.waitKey(1)
+        
         # Πάτα το 'q' για να κλείσει το παράθυρο αφου πρώτα το έχεις επιλέξει
         if key & 0xFF == ord('q'):
             cv2.destroyAllWindows()
